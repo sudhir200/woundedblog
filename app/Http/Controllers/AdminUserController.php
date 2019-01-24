@@ -35,12 +35,20 @@ class AdminUserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return string
      */
     public function store(UserRequest $request)
     {
-        User::create($request->all());
-        return redirect('admin/user');
+//       $input = $request->all();
+//       $input['password']=bcrypt($request->password);
+
+      if ($file=$request->file('photo_id'))
+      {
+          return 'file exist ';
+      }
+//        $user=User::create($input);
+//        dd($user);
+//        return redirect('admin/user');
     }
 
     /**
