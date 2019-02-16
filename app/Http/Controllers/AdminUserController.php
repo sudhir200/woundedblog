@@ -8,6 +8,7 @@ use App\Photo;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use function Sodium\compare;
 
 class AdminUserController extends Controller
@@ -58,6 +59,7 @@ class AdminUserController extends Controller
           $input['photo_id']=$photo->id;
       }
         $user=User::create($input);
+        Session::flash('created_user','The user has been created');
         return redirect('admin/user');
     }
 
@@ -122,6 +124,8 @@ class AdminUserController extends Controller
         }
        $user->update($input);
 
+        Session::flash('updated_user','The user has been updated');
+
        return redirect('admin/user');
     }
 
@@ -133,6 +137,13 @@ class AdminUserController extends Controller
      */
     public function destroy($id)
     {
-        return ('delete');
+
+
+
+        $user=User::find($id);
+        unlink(public_path() . $user->photo->file);
+        $user->delete();
+        Session::flash('deleted_user','The user has been deleted');
+        return redirect('admin/user');
     }
 }

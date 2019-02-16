@@ -1,6 +1,19 @@
 @extends('layouts.admin')
 
 @section('content')
+    @if(Session::has('deleted_user'))
+        <div class="alert alert-danger">
+            <p>{{session('deleted_user')}}</p>
+        </div>
+    @elseif(Session::has('updated_user'))
+        <div class="alert alert-success ">
+             <p>{{session('updated_user')}}</p>
+        </div>
+    @elseif (Session::has('created_user'))
+        <div class="alert alert-info ">
+            <p>{{session('created_user')}}</p>
+        </div>
+    @endif
 
     <table class="table">
         <thead>
