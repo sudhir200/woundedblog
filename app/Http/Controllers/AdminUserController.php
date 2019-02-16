@@ -133,6 +133,6 @@ class AdminUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return ('delete');
     }
 }
