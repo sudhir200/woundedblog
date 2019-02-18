@@ -10,7 +10,6 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.js('resources/js/app.js' , 'public/app.js');
        mix.scripts([
 
          'resources/js/libs/jquery.js',
@@ -19,7 +18,6 @@ mix.js('resources/js/app.js' , 'public/app.js');
          'resources/js/libs/sb-admin.js',
          'resources/js/libs/scripts.js'], 'public/js/libs.js');
 
-            mix.sass('resources/sass/app.scss', 'public/css');
 
             mix.styles([
           'resources/css/libs/blog-post.css',
