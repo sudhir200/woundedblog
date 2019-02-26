@@ -1,19 +1,19 @@
 @extends('layouts.admin')
 
-@section('content')
-    @if(Session::has('deleted_user'))
+ @section('content')
+     @if(Session::has('deleted_user'))
         <div class="alert alert-danger">
             <p>{{session('deleted_user')}}</p>
         </div>
-    @elseif(Session::has('updated_user'))
-        <div class="alert alert-success ">
+     @elseif(Session::has('updated_user'))
+          <div class="alert alert-success ">
              <p>{{session('updated_user')}}</p>
-        </div>
-    @elseif (Session::has('created_user'))
-        <div class="alert alert-info ">
+          </div>
+     @elseif (Session::has('created_user'))
+          <div class="alert alert-info ">
             <p>{{session('created_user')}}</p>
-        </div>
-    @endif
+          </div>
+     @endif
 
     <table class="table">
         <thead>
@@ -29,7 +29,7 @@
 
           </tr>
         </thead>
-        <tbody>
+      <tbody>
         @foreach($users as $user)
           <tr>
               <td>{{$user->id}}</td>
@@ -38,19 +38,15 @@
               <th>{{$user->role['name']}}</th>
               <td>
                   {{$user->is_active == 1 ? 'Active' : 'Inactive'}}
-
               </td>
-              <td><img height="50" src="{{$user->photo['file']}}" alt=""></td>
+              <td><img height="50" src="{{$user->photo ? $user->photo['file'] : 'https://placehold.it/400x400'}}" alt=""></td>
               <td>{{$user->created_at->diffForHumans()}}</td>
               <td>{{$user->updated_at->diffForHumans()}}</td>
-
-
           </tr>
-        <tbody>
-
         @endforeach
-     </table>
+      <tbody>
 
 
-@stop
+    </table>
+ @stop
 
