@@ -76,7 +76,9 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-
+        $post = Post::find($id);
+        $category = Category::pluck('name','id')->all();
+        return view('admin/posts/edit',compact('post','category'));
     }
 
     /**
@@ -88,7 +90,28 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post  = Post::find($id);
+        $input = $request->all();
+        if(Auth::id() == $post->user_id)
+        {
+
+
+            if ($file = $request->file('photo_id')) {
+                $name = time() . $file->getClientOriginalName();
+                $file->move('images', $name);
+                $photo = Photo::create(['file' => $name]);
+                $input['photo_id'] = $photo->id;
+            }
+
+            $post->update($input);
+            return redirect('admin/posts');
+        }
+        else
+        {
+            return ('this is unauth user');
+        }
+
+
     }
 
     /**
